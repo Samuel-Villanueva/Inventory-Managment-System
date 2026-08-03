@@ -16,6 +16,7 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from app.models.orders import Orders
     from app.models.autid_logs import AuditLogs
+    from app.models.user_roles import UserRoles
 
 class Users(Base):
 
@@ -32,3 +33,4 @@ class Users(Base):
 
     orders: MappedColumn['Orders'] = relationship(back_populates='user')
     logs: MappedColumn['AuditLogs'] = relationship(back_populates='user')
+    roles: MappedColumn['UserRoles'] = relationship(back_populates='users')

@@ -28,6 +28,10 @@ from app.models.users import Users
 from app.models.orders import Orders
 from app.models.order_details import OrderDetails
 from app.models.autid_logs import AuditLogs
+from app.models.permissions import Permissions
+from app.models.role_permissions import RolePermissions
+from app.models.roles import Roles
+from app.models.user_roles import UserRoles
 
 target_metadata = Base.metadata
 config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)
