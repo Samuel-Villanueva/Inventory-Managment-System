@@ -1,3 +1,2 @@
 .venv
-alembic/versions
 .env
