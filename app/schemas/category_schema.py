@@ -11,7 +11,7 @@ from datetime import datetime
 
 class CategoryCreate(BaseModel):
     name: str = Field(..., examples=['Dairy', 'Jacqueline'])
-    description: str = Field(default=None, examples=['Dairy is...'])
+    description: str | None = Field(default=None, examples=['Dairy is...'])
 
 class CategoryResponse(CategoryCreate):
     id: UUID = Field(...)
