@@ -6,12 +6,13 @@ user_roles.py
 '''
 
 from sqlalchemy.orm import MappedColumn, mapped_column, relationship
-from sqlalchemy import Integer, DateTime, ForeignKey
+from sqlalchemy import Integer, DateTime, ForeignKey, UUID as PG_UUID
 
 from app.models.base_model import Base
 
 from datetime import datetime
 from typing import TYPE_CHECKING
+from uuid import UUID
 
 if TYPE_CHECKING:
     from app.models.users import Users
@@ -20,11 +21,11 @@ if TYPE_CHECKING:
 class UserRoles(Base):
     __tablename__ = 'user_roles'
 
-    user_id: MappedColumn[int] = mapped_column(
+    user_id: MappedColumn[UUID] = mapped_column(
         ForeignKey('users.id'), primary_key=True
     )
 
-    role_id: MappedColumn[int] = mapped_column(
+    role_id: MappedColumn[UUID] = mapped_column(
         ForeignKey('roles.id'), primary_key=True
     )
 

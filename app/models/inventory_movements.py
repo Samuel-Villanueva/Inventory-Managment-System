@@ -6,7 +6,7 @@ inventory_movements.py
 '''
 
 from sqlalchemy.orm import MappedColumn, mapped_column, relationship
-from sqlalchemy import Integer, String, DateTime, ForeignKey, Enum as EnumAlchemy
+from sqlalchemy import Integer, String, DateTime, ForeignKey, Enum as EnumAlchemy, UUID as PG_UUID
 
 from datetime import datetime
 
@@ -14,6 +14,7 @@ from app.models.products import Products
 from app.models.base_model import Base
 
 from enum import Enum
+from uuid import UUID
 
 class MovementType(str, Enum):
     IN = "IN"
@@ -37,11 +38,11 @@ class ReferenceType(str, Enum):
 class InventoryMovements(Base):
     __tablename__ = 'inventory_movements'
 
-    id: MappedColumn[int] = mapped_column(Integer, primary_key=True)
+    id: MappedColumn[UUID] = mapped_column(PG_UUID, primary_key=True)
     product_id: MappedColumn[int] = mapped_column(
         ForeignKey('products.id')
     )
-    user_id: MappedColumn[int] = mapped_column(
+    user_id: MappedColumn[UUID] = mapped_column(
         ForeignKey('users.id')
     )
     movement_type: MappedColumn[MovementType] = mapped_column(EnumAlchemy(MovementType), nullable=False)

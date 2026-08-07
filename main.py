@@ -6,9 +6,12 @@ main.py
 
 '''
 
+import app.models
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 import logging
+
+from app.routes.router import router
 
 logger = logging.getLogger(__name__)
 
@@ -27,6 +30,8 @@ async def life_span(app: FastAPI):
     logging.info('Down server...')
 
 app = FastAPI(lifespan=life_span)
+
+app.include_router(router)
 
 @app.get(path='/')
 def root():

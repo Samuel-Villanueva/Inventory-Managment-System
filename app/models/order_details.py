@@ -6,20 +6,22 @@ order_details.py
 '''
 
 from sqlalchemy.orm import MappedColumn, mapped_column, relationship
-from sqlalchemy import Integer, Numeric, ForeignKey
+from sqlalchemy import Integer, Numeric, ForeignKey, UUID as PG_UUID
 
 from app.models.base_model import Base
 from app.models.products import Products
 from app.models.orders import Orders
 
+from uuid import UUID
+
 class OrderDetails(Base):
     __tablename__ = 'order_details'
 
-    id: MappedColumn[int] = mapped_column(Integer, primary_key=True)
-    order_id: MappedColumn[int] = mapped_column(
+    id: MappedColumn[UUID] = mapped_column(PG_UUID, primary_key=True)
+    order_id: MappedColumn[UUID] = mapped_column(
         ForeignKey('orders.id')
     )
-    product_id: MappedColumn[int] = mapped_column(
+    product_id: MappedColumn[UUID] = mapped_column(
         ForeignKey('products.id')
     )
     quantity: MappedColumn[int] = mapped_column(Integer, nullable=False)

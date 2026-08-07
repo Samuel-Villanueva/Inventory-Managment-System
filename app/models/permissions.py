@@ -6,11 +6,12 @@ permissions.py
 '''
 
 from sqlalchemy.orm import MappedColumn, mapped_column, relationship
-from sqlalchemy import Integer, String, Text, DateTime
+from sqlalchemy import Integer, String, Text, DateTime, UUID as PG_UUID
 
 from app.models.base_model import Base
 from datetime import datetime
 from typing import TYPE_CHECKING
+from uuid import UUID
 
 if TYPE_CHECKING:
     from app.models.role_permissions import RolePermissions
@@ -18,7 +19,7 @@ if TYPE_CHECKING:
 class Permissions(Base):
     __tablename__ = 'permissions'
 
-    id: MappedColumn[int] = mapped_column(Integer, primary_key=True)
+    id: MappedColumn[UUID] = mapped_column(Integer, primary_key=True)
     name: MappedColumn[str] = mapped_column(String, unique=True)
     description: MappedColumn[str] = mapped_column(Text, nullable=True)
     created_at: MappedColumn[datetime] = mapped_column(DateTime, nullable=False)

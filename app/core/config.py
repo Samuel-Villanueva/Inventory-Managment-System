@@ -45,6 +45,8 @@ class Config(BaseSettings):
     REDIS_DB: int
     REDIS_PASSWORD: str
 
+    TIME_ZONE: str
+
     model_config = SettingsConfigDict(
         env_file='.env'
     )
