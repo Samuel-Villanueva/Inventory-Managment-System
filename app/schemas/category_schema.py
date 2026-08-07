@@ -10,7 +10,7 @@ from uuid import UUID
 from datetime import datetime
 
 class CategoryCreate(BaseModel):
-    name: str = Field(..., examples=['Samuel', 'Jacqueline'])
+    name: str = Field(..., examples=['Dairy', 'Jacqueline'])
     description: str = Field(default=None, examples=['Dairy is...'])
 
 class CategoryResponse(CategoryCreate):

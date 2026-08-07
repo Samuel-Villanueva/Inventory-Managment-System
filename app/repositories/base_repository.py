@@ -7,7 +7,7 @@ base_repository.py
 
 from app.models.base_model import Base
 from sqlalchemy.orm import Session
-from sqlalchemy import select
+from sqlalchemy import select, func
 from sqlalchemy.exc import IntegrityError
 
 class BaseRepository:
@@ -26,6 +26,16 @@ class BaseRepository:
         except IntegrityError:
             self._session.rollback()
 
+    def get_all(self, offset: int, limit: int) -> list[Base]:
+        query = select(self._model).offset((offset - 1) * limit).limit(limit)
+
+        return self._session.execute(query).scalars().all()
+
     def get_by_id(self, id: int):
-        query = select(self._model).where(self._model == id)
+        query = select(self._model).where(self._model.id == id)
         return self._session.execute(query).scalar_one_or_none()
+
+    def count(self) -> int:
+        query = select(func.count()).select_from(self._model)
+
+        return self._session.execute(query).scalar_one()

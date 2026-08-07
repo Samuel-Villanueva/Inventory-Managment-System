@@ -19,5 +19,11 @@ class CategoryRepository(BaseRepository):
     def create(self, entity: Categories) -> Categories | None:
         return super().create(entity)
 
+    def get_all(self, offset: int, limit: int) -> list[Categories]:
+        return super().get_all(offset, limit)
+
     def get_by_id(self, id: int) -> Categories | None:
         return super().get_by_id(id)
+
+    def count(self):
+        return super().count()
